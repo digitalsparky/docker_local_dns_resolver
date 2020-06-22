@@ -1,12 +1,12 @@
 #!/bin/bash
-BIND_VERSION="9-10-4-p2"
+BIND_VERSION="9.16.4"
 BIND_PATH="/opt/bind"
 TEMP_PATH="/tmp/bind"
 export DEBIAN_FRONTEND=noninteractive
 echo "Updating OS and installing packages"
 apt-get update -qq
-apt-get upgrade -qq -y 
-apt-get dist-upgrade -qq -y 
+apt-get upgrade -qq -y
+apt-get dist-upgrade -qq -y
 apt-get install -qq -y \
     ca-certificates \
     sudo \
@@ -21,7 +21,7 @@ apt-get autoremove -qq -y
 apt-get autoclean -qq
 mkdir -p "${BIND_PATH}"
 mkdir -p "${TEMP_PATH}"
-curl -o "${TEMP_PATH}.tgz" "https://www.isc.org/downloads/file/bind-${BIND_VERSION}/?version=tar-gz"
+curl -o "${TEMP_PATH}.txz" "https://downloads.isc.org/isc/bind9/${BIND_VERSION}/bind-${BIND_VERSION}.tar.xz"
 cd "${TEMP_PATH}"
 tar -zxf "${TEMP_PATH}.tgz" --strip-components 1
 ./configure --prefix="${BIND_PATH}" --disable-linux-caps && make && make install
